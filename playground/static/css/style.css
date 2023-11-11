@@ -27,19 +27,18 @@ div{
 
 .container-photo {
     object-fit: contain;
-    display: flex;
-    justify-content: center;
     background-color: aliceblue;
     border: 1px solid lightblue;
     border-radius: 10px;
-}
-img {
     height: 400px;
+    width: 200px;
+}
+
+.ligne {
+    text-align: center;
 }
 
 .character-title {
-    justify-content: center;
-    display: flex;
     color : rgb(39, 73, 36);
     text-decoration: none;
 }
