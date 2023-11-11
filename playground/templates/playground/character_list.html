@@ -1,0 +1,18 @@
+{% load static %}
+
+<html>
+    <head>
+        <title>Le Seigneur des Anneaux</title>
+    </head>
+    <body>
+        <div>
+            <h1><a href="/">Le Seigneur des Anneaux</a></h1>
+        </div>
+        {% for character in characters %}
+            <div>
+                <h2><a href="">{{character.id_character}}</a></h2>
+                <img src=" {% static 'media/{{character.id_character}}.png' %} " alt="photo">
+            </div>
+        {% endfor %}
+    </body>
+</html>
