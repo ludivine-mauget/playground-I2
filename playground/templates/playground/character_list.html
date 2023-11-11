@@ -11,7 +11,7 @@
         {% for character in characters %}
             <div>
                 <h2><a href="">{{character.id_character}}</a></h2>
-                <img src=" {% static 'media/{{character.id_character}}.png' %} " alt="photo">
+                <img src="{% get_static_prefix %}{{character.photo}}" alt="photo">
             </div>
         {% endfor %}
     </body>
