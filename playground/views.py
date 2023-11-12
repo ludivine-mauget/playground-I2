@@ -1,7 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import MoveForm
 from .models import Character, Equipement
-from django.db import transaction
 
 def character_list(request):
         characters = Character.objects.all()
@@ -11,19 +10,19 @@ def character_list(request):
 def character_detail(request, id_character):
         character = get_object_or_404(Character, id_character=id_character)
         ancien_equip = get_object_or_404(Equipement, id_equip=character.equipement.id_equip)
-        print(ancien_equip)
+        # print(ancien_equip)
         if request.method == "POST":
                 form = MoveForm(request.POST, instance=character)
                 if form.is_valid():
                         nouveau_equip = form.cleaned_data['equipement']
-                        print(nouveau_equip)
+                        # print(nouveau_equip)
                         equip_choisi = get_object_or_404(Equipement, id_equip=nouveau_equip)
-                        print(equip_choisi)
+                        # print(equip_choisi)
                         if equip_choisi.disponibilite == "libre" :
                                         # ancien_equip = get_object_or_404(Equipement, id_equip=character.equipement.id_equip)
                                         ancien_equip.disponibilite = "libre"
-                                        print(ancien_equip)
-                                        print(ancien_equip.disponibilite)
+                                        # print(ancien_equip)
+                                        # print(ancien_equip.disponibilite)
                                         ancien_equip.save()
                                         if equip_choisi.id_equip != "Épée":
                                                 equip_choisi.disponibilite = "occupé"
@@ -32,10 +31,11 @@ def character_detail(request, id_character):
                                         character.save()
                                         return redirect('character_detail', id_character=character.id_character)
                         else :
-                                return redirect('character_detail', id_character=character.id_character)
-                else:
-                        form = MoveForm()
-                        return render(request, 'playground/character_detail.html', {'character': character, 'equipement': character.equipement, 'form': form})
+                                message = "L'équipement est déjà pris !"
+                                return render(request, 'playground/character_detail.html', {'character': character, 'message': message})
+                else :
+                        message = "Le formulaire n'est pas valide."
+                        return render(request, 'playground/character_detail.html', {'character': character, 'equipement': character.equipement, 'form': form, 'message': message})
         else:
                 form = MoveForm()
                 return render(request, 'playground/character_detail.html', {'character': character, 'equipement': character.equipement, 'form': form})

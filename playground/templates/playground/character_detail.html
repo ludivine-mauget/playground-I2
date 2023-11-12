@@ -1,7 +1,14 @@
 {% extends 'playground/base.html' %}
 {% load static %}
 
+
+
 {% block content %}
+{% if message %}
+<div class="alert alert-danger" role="alert">
+    {{message}}
+</div>
+{% endif %}
     <div class="container">
         <h1>
             <a class="character-title" href="{% url 'character_detail' id_character=character.id_character %}">{{ character.id_character }}</a>
