@@ -10,19 +10,25 @@ def character_list(request):
 
 def character_detail(request, id_character):
         character = get_object_or_404(Character, id_character=id_character)
+        ancien_equip = get_object_or_404(Equipement, id_equip=character.equipement.id_equip)
+        print(ancien_equip)
         if request.method == "POST":
                 form = MoveForm(request.POST, instance=character)
                 if form.is_valid():
-                        if character.equipement.disponibilite == "libre" :
-                                        ancien_equip = get_object_or_404(Equipement, id_equip=character.equipement.id_equip)
+                        nouveau_equip = form.cleaned_data['equipement']
+                        print(nouveau_equip)
+                        equip_choisi = get_object_or_404(Equipement, id_equip=nouveau_equip)
+                        print(equip_choisi)
+                        if equip_choisi.disponibilite == "libre" :
+                                        # ancien_equip = get_object_or_404(Equipement, id_equip=character.equipement.id_equip)
                                         ancien_equip.disponibilite = "libre"
+                                        print(ancien_equip)
+                                        print(ancien_equip.disponibilite)
                                         ancien_equip.save()
-                                        form.save(commit=False)
-                                        nouveau_equip = get_object_or_404(Equipement, id_equip=character.equipement.id_equip)
-                                        if nouveau_equip.id_equip != "Épée":
-                                                nouveau_equip.disponibilite = "occupé"
-                                        nouveau_equip.save()
-                                        character.equipement = nouveau_equip
+                                        if equip_choisi.id_equip != "Épée":
+                                                equip_choisi.disponibilite = "occupé"
+                                        equip_choisi.save()
+                                        character.equipement = equip_choisi
                                         character.save()
                                         return redirect('character_detail', id_character=character.id_character)
                         else :
