@@ -2,14 +2,22 @@
 {% load static %}
 
 {% block content %}
-    <div class="page-header">
+    <div class="container">
         <h1>
-            <a href="{% url 'character_detail' id_character=character.id_character %}">{{ character.id_character }}</a>
+            <a class="character-title" href="{% url 'character_detail' id_character=character.id_character %}">{{ character.id_character }}</a>
         </h1>
+        <div class="row content">
+            <div class="col-lg-2 col-md-6">
+                <img class="container-photo" src="{% get_static_prefix %}{{character.photo}}" alt={{character.id_character}}>
+            </div>
+            <div class="col-lg-2 col-md-6">
+                <img class="container-photo" src="{% get_static_prefix %}{{character.equipement.photo}}" alt={{character.equipement.id_equip}}>
+            </div>
+        </div>
         <form method="POST" class="post-form">{% csrf_token %}
-            <b> Changer : </b> {{ form.as_ul }}
-            <button type="submit" class="btn btn-outline-light">OK</button>
-            <a href="{% url 'character_list' %}">Back</a>
+            <b class="intro-form"> Changer : </b> {{ form.as_ul }}
+            <button type="submit" class="btn-form">OK</button>
+            <a class="btn-form" href="{% url 'character_list' %}">Back</a>
         </form>
     </div>
 {% endblock %}
