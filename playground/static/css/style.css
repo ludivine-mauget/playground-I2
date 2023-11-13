@@ -92,6 +92,11 @@ h2 {
 
 }
 
+.description-text {
+    padding-bottom: 10px;
+    font-style: italic;
+}
+
 .btn-form {
     background-color:rgb(224, 237, 199);
     color: black;

@@ -46,6 +46,13 @@ def character_detail(request, id_character):
                                                 ancien_lieu.save()
                                                 if lieu_choisi.id_lieu == "Lit":
                                                         lieu_choisi.disponibilite = "occupé"
+                                                        character.etat = "endormi"
+                                                if lieu_choisi.id_lieu == "Foncombe":
+                                                        character.etat = "repus"
+                                                if lieu_choisi.id_lieu == "Champ de bataille":
+                                                        character.etat = "fatigué"
+                                                if lieu_choisi.id_lieu == "Comté":
+                                                        character.etat = "affamé"
                                                 lieu_choisi.save()
                                                 character.lieu = lieu_choisi
                                                 character.save()
