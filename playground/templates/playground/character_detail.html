@@ -18,9 +18,17 @@
                 <img class="container-photo" src="{% get_static_prefix %}{{character.photo}}" alt={{character.id_character}}>
             </div>
             <div class="col-lg-2 col-md-6">
-                <img class="container-photo" src="{% get_static_prefix %}{{character.equipement.photo}}" alt={{character.equipement.id_equip}}>
+                <img class="container-photo" src="{% get_static_prefix %}{{equipement.photo}}" alt={{character.equipement.id_equip}}>
+            </div>
+            <div class="col-lg-2 col-md-6">
+                <img class="container-photo" src="{% get_static_prefix %}{{lieu.photo}}" alt={{character.lieu.id_lieu}}>
             </div>
         </div>
+        <form method="POST" class="post-form">{% csrf_token %}
+            <b class="intro-form"> Changer : </b> {{ form.as_ul }}
+            <button type="submit" class="btn-form">OK</button>
+            <a class="btn-form" href="{% url 'character_list' %}">Back</a>
+        </form>
         <form method="POST" class="post-form">{% csrf_token %}
             <b class="intro-form"> Changer : </b> {{ form.as_ul }}
             <button type="submit" class="btn-form">OK</button>

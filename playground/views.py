@@ -31,8 +31,9 @@ def character_detail(request, id_character):
                                         character.save()
                                         return redirect('character_detail', id_character=character.id_character)
                         else :
-                                message = "L'équipement est déjà pris !"
-                                return render(request, 'playground/character_detail.html', {'character': character, 'message': message})
+                                occupant = get_object_or_404(Character, equipement=equip_choisi.id_equip)
+                                message = f"L'équipement {nouveau_equip} est déjà équipé par {occupant}  !"
+                                return render(request, 'playground/character_detail.html', {'character': character, 'equipement': ancien_equip, 'form': form, 'message': message})
                 else :
                         message = "Le formulaire n'est pas valide."
                         return render(request, 'playground/character_detail.html', {'character': character, 'equipement': character.equipement, 'form': form, 'message': message})
