@@ -29,23 +29,24 @@
                     <p><b> Etat :</b> {{character.etat}} </p>
                     <p><b> Equipement :</b> {{character.equipement.id_equip}} </p>
                     <p><b> Lieu :</b> {{character.lieu.id_lieu}} </p>
-                    <h2> Description : </h2>
-                    <p class="description-text"> {{character.description}} </p>
                 </div>
                 <div class="col-lg-2 character-infos">
                     <h2> Modifier : </h2>
                     <form method="POST" class="post-form">{% csrf_token %}
                         <b class="intro-form"> Changer : </b> {{ equip_form.as_ul }}
                         <button type="submit" class="btn-form">OK</button>
-                        <a class="btn-form" href="{% url 'character_list' %}">Back</a>
                     </form>
                     <form method="POST" class="post-form">{% csrf_token %}
                         <b class="intro-form"> Changer : </b> {{ lieu_form.as_ul }}
                         <button type="submit" class="btn-form">OK</button>
-                        <a class="btn-form" href="{% url 'character_list' %}">Back</a>
                     </form>
                 </div>
             </div>
+            <div class="character-infos">
+                <h2> Description : </h2>
+                <p class="description-text"> {{character.description}} </p>
+            </div>
+            <a class="btn-form" href="{% url 'character_list' %}">Retour à la page d'accueil</a>
         </div>
-        <div class="footer">
+    </div>
 {% endblock %}
