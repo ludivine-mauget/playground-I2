@@ -16,6 +16,11 @@ h2 {
     color : rgb(39, 73, 36);
 }
 
+a {
+    text-decoration: none;
+    color: rgb(244, 246, 240);
+}
+
 .page-header {
     background-color: rgb(39, 73, 36);
     margin: 0;
@@ -59,6 +64,10 @@ h2 {
     background-color: rgb(159, 188, 156);
 }
 
+.detail:hover {
+    background-color: rgb(244, 246, 240);
+    border: 1px solid rgb(178, 197, 176);
+}
 
 .ligne {
     text-align: center;
@@ -125,6 +134,6 @@ h2 {
     background-color: rgb(39, 73, 36);
     color: white;
     text-align: center;
-    padding: 10px;
+    padding: 20px;
     margin-top: 10px;
 }
