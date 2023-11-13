@@ -1,8 +1,6 @@
 {% extends 'playground/base.html' %}
 {% load static %}
 
-
-
 {% block content %}
 {% if message %}
 <div class="alert alert-danger" role="alert">
@@ -21,13 +19,33 @@
                 <img class="container-photo" src="{% get_static_prefix %}{{equipement.photo}}" alt={{character.equipement.id_equip}}>
             </div>
             <div class="col-lg-2 col-md-6">
-                <img class="container-photo" src="{% get_static_prefix %}{{lieu.photo}}" alt={{character.lieu.id_lieu}}>
+                <img class="container-photo-lieu" src="{% get_static_prefix %}{{lieu.photo}}" alt={{character.lieu.id_lieu}}>
+            </div>
+            <div class="row ligne">
+                <div class="col-lg-2 character-infos">
+                    <h2> Infos : </h2>
+                    <p><b> Nom :</b> {{character.id_character}} </p>
+                    <p><b> Race :</b> {{character.race}} </p>
+                    <p><b> Etat :</b> {{character.etat}} </p>
+                    <p><b> Equipement :</b> {{character.equipement.id_equip}} </p>
+                    <p><b> Lieu :</b> {{character.lieu.id_lieu}} </p>
+                    <h2> Description : </h2>
+                    <p class="description-text"> {{character.description}} </p>
+                </div>
+                <div class="col-lg-2 character-infos">
+                    <h2> Modifier : </h2>
+                    <form method="POST" class="post-form">{% csrf_token %}
+                        <b class="intro-form"> Changer : </b> {{ equip_form.as_ul }}
+                        <button type="submit" class="btn-form">OK</button>
+                        <a class="btn-form" href="{% url 'character_list' %}">Back</a>
+                    </form>
+                    <form method="POST" class="post-form">{% csrf_token %}
+                        <b class="intro-form"> Changer : </b> {{ lieu_form.as_ul }}
+                        <button type="submit" class="btn-form">OK</button>
+                        <a class="btn-form" href="{% url 'character_list' %}">Back</a>
+                    </form>
+                </div>
             </div>
         </div>
-        <form method="POST" class="post-form">{% csrf_token %}
-            <b class="intro-form"> Changer : </b> {{ form.as_ul }}
-            <button type="submit" class="btn-form">OK</button>
-            <a class="btn-form" href="{% url 'character_list' %}">Back</a>
-        </form>
-    </div>
+        <div class="footer">
 {% endblock %}
