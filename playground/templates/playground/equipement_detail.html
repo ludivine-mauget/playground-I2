@@ -12,7 +12,7 @@
             <a class="character-title" href="{% url 'equipement_detail' id_equip=equipement.id_equip %}">{{ equipement.id_equip }}</a>
         </h1>
         <div class="row content">
-            <div class="col-lg-2 col-md-6">
+            <div class="col-lg-2 col-md-6 content decalage">
                 <img class="container-photo detail" src="{% get_static_prefix %}{{equipement.photo}}" alt={{equipement.id_equip}}>
             </div>
             <div class="row ligne">

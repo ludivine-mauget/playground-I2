@@ -9,6 +9,7 @@ a img {
 
 div{
     padding-left: 10px;
+    padding-right: 10px;
 }
 
 p {
@@ -21,7 +22,7 @@ h2 {
 }
 
 .footer a {
-    text-decoration: none;
+    /* text-decoration: none; */
     color: rgb(244, 246, 240);
 }
 
@@ -89,6 +90,7 @@ h2 {
 
 .content {
     justify-content: center;
+    text-align: center;
 }
 
 .character-infos {
@@ -149,4 +151,8 @@ h2 {
     height: 400px;
     width: 200px;
     box-shadow: 2px 2px 2px 0px rgb(178, 197, 176);
+}
+
+.decalage {
+    margin-right: 10px;
 }

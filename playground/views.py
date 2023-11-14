@@ -41,22 +41,39 @@ def character_detail(request, id_character):
                         if lieu_form.is_valid():
                                 nouveau_lieu = lieu_form.cleaned_data['lieu']
                                 lieu_choisi = get_object_or_404(Lieu, id_lieu=nouveau_lieu)
+                                if lieu_choisi == ancien_lieu :
+                                        message = f"{character} déjà dans le lieu {lieu_choisi} !"
+                                        return render(request, 'playground/character_detail.html', {'character': character, 'equipement': ancien_equip, 'equip_form': equip_form, 'lieu_form': lieu_form, 'message': message, 'lieu': ancien_lieu})
                                 if lieu_choisi.disponibilite == "libre" :
-                                                ancien_lieu.disponibilite = "libre"
-                                                ancien_lieu.save()
-                                                if lieu_choisi.id_lieu == "Lit":
-                                                        lieu_choisi.disponibilite = "occupé"
-                                                        character.etat = "endormi"
-                                                if lieu_choisi.id_lieu == "Foncombe":
-                                                        character.etat = "repus"
-                                                if lieu_choisi.id_lieu == "Champ de bataille":
-                                                        character.etat = "fatigué"
-                                                if lieu_choisi.id_lieu == "Comté":
-                                                        character.etat = "affamé"
-                                                lieu_choisi.save()
-                                                character.lieu = lieu_choisi
-                                                character.save()
-                                                return redirect('character_detail', id_character=character.id_character)
+                                        # Si le personnage est fatigué, il ne peut aller que dans le lit
+                                        if character.etat == "fatigué" and lieu_choisi.id_lieu != "Lit":
+                                                message = f"{character} est fatigué et ne peut aller que dans le lit pour se reposer !"
+                                                return render(request, 'playground/character_detail.html', {'character': character, 'equipement': ancien_equip, 'equip_form': equip_form, 'lieu_form': lieu_form, 'message': message, 'lieu': ancien_lieu})
+                                        # Si le personnage est endormi, il ne peut aller que dans la comté
+                                        if character.etat == "endormi" and lieu_choisi.id_lieu != "Comté":
+                                                message = f"{character} est endormi et ne peut aller que dans la Comté pour se réveiller !"
+                                                return render(request, 'playground/character_detail.html', {'character': character, 'equipement': ancien_equip, 'equip_form': equip_form, 'lieu_form': lieu_form, 'message': message, 'lieu': ancien_lieu})
+                                        if character.etat == "affamé" and lieu_choisi.id_lieu != "Foncombe":
+                                                message = f"{character} est affamé et ne peut aller qu'à Foncombe pour manger !"
+                                                return render(request, 'playground/character_detail.html', {'character': character, 'equipement': ancien_equip, 'equip_form': equip_form, 'lieu_form': lieu_form, 'message': message, 'lieu': ancien_lieu})
+                                        if character.etat == "repus" and lieu_choisi.id_lieu != "Champ de bataille":
+                                                message = f"{character} est repus et ne peut aller qu'au champ de bataille pour se battre !"
+                                                return render(request, 'playground/character_detail.html', {'character': character, 'equipement': ancien_equip, 'equip_form': equip_form, 'lieu_form': lieu_form, 'message': message, 'lieu': ancien_lieu})
+                                        ancien_lieu.disponibilite = "libre"
+                                        ancien_lieu.save()
+                                        if lieu_choisi.id_lieu == "Lit":
+                                                lieu_choisi.disponibilite = "occupé"
+                                                character.etat = "endormi"
+                                        if lieu_choisi.id_lieu == "Foncombe":
+                                                character.etat = "repus"
+                                        if lieu_choisi.id_lieu == "Champ de bataille":
+                                                character.etat = "fatigué"
+                                        if lieu_choisi.id_lieu == "Comté":
+                                                character.etat = "affamé"
+                                        lieu_choisi.save()
+                                        character.lieu = lieu_choisi
+                                        character.save()
+                                        return redirect('character_detail', id_character=character.id_character)
                                 else :
                                         occupants = Character.objects.filter(lieu=lieu_choisi.id_lieu)
                                         noms_occupants = ",".join([occupant.id_character for occupant in occupants])
