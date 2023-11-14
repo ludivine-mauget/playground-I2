@@ -3,6 +3,10 @@
     padding: 0;
 }
 
+a img {
+    border: 1px solid rgb(178, 197, 176);
+}
+
 div{
     padding-left: 10px;
 }
@@ -16,7 +20,7 @@ h2 {
     color : rgb(39, 73, 36);
 }
 
-a {
+.footer a {
     text-decoration: none;
     color: rgb(244, 246, 240);
 }
@@ -136,4 +140,13 @@ a {
     text-align: center;
     padding: 20px;
     margin-top: 10px;
+}
+
+.container-equip {
+    background-color: rgb(244, 246, 240);
+    border: 1px solid rgb(178, 197, 176);
+    border-radius: 10px;
+    height: 400px;
+    width: 200px;
+    box-shadow: 2px 2px 2px 0px rgb(178, 197, 176);
 }

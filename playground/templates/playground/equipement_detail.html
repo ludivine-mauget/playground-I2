@@ -1,0 +1,31 @@
+{% extends 'playground/base.html' %}
+{% load static %}
+
+{% block content %}
+{% comment %} {% if message %}
+<div class="alert alert-danger" role="alert">
+    {{message}}
+</div>
+{% endif %} {% endcomment %}
+    <div class="container">
+        <h1>
+            <a class="character-title" href="{% url 'equipement_detail' id_equip=equipement.id_equip %}">{{ equipement.id_equip }}</a>
+        </h1>
+        <div class="row content">
+            <div class="col-lg-2 col-md-6">
+                <img class="container-photo detail" src="{% get_static_prefix %}{{equipement.photo}}" alt={{equipement.id_equip}}>
+            </div>
+            <div class="row ligne">
+                <div class="col-lg-2 character-infos">
+                    <h2> Infos : </h2>
+                    <p><b> Nom :</b> {{equipement.id_equip}} </p>
+                </div>
+            </div>
+            <div class="character-infos">
+                <h2> Description : </h2>
+                <p class="description-text"> {{equipement.description}} </p>
+            </div>
+            <a class="btn-form" href="{% url 'character_list' %}">Retour à la page d'accueil</a>
+        </div>
+    </div>
+{% endblock %}

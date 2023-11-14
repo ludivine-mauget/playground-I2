@@ -69,3 +69,7 @@ def character_detail(request, id_character):
                 equip_form = EquipForm()
                 lieu_form = LieuForm()
                 return render(request, 'playground/character_detail.html', {'character': character, 'equipement': character.equipement, 'equip_form': equip_form, 'lieu_form': lieu_form, 'lieu': character.lieu})
+
+def equipement_detail(request, id_equip):
+        equipement = get_object_or_404(Equipement, id_equip=id_equip)
+        return render(request, 'playground/equipement_detail.html', {'equipement': equipement})
